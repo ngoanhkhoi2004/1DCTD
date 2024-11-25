@@ -10,4 +10,3 @@ class Bullet(Turtle):
     def move(self):
         pass
 
-print(type("x")==str)
