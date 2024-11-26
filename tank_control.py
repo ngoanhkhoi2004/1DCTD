@@ -1,4 +1,3 @@
-import time
 from turtle import Turtle
 from bullet import Bullet
 import sys
@@ -26,8 +25,16 @@ class MainTank(Turtle):
         square.goto(self.xcor() + 22 * 1, self.ycor()+22)
         self.body.append(square)
 
+
     def shoot(self):
-        pass
+        bullet = Bullet()
+        bullet.setx(self.body[3].xcor())
+        bullet.sety(self.body[3].ycor())
+        orientation = self.get_orientation()
+        if orientation == "up":
+            bullet.x = 0
+            bullet.y = 22
+            bullet.move()
 
     def rotate(self, direction):
         """
