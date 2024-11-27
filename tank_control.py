@@ -27,7 +27,17 @@ class MainTank(Turtle):
         self.body.append(square)
 
     def shoot(self):
-        pass
+        bullet = Bullet()
+        bullet.setx(self.body[3].xcor())
+        bullet.sety(self.body[3].ycor())
+        orientation = self.get_orientation()
+        if orientation == "up":
+            bullet.x = 0
+            bullet.y = 22
+            bullet.move()
+
+
+
 
     def rotate(self, direction):
         """
