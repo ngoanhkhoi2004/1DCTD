@@ -8,5 +8,5 @@ class Bullet(Turtle):
 
 
     def move(self):
-        pass
+        print('h')
 
