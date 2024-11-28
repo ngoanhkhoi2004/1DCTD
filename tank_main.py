@@ -24,12 +24,30 @@ screen.onkeypress(main_tank.move, "Right")
 screen.onkeypress(main_tank.move, "Up")
 screen.onkeypress(main_tank.move, "Down")
 screen.onkeypress(main_tank.move, "Left")
-screen.onkeypress(main_tank.shoot , "space")
-screen.delay(0.6)
+
+can_shoot = True
+
+def reset_can_shoot():
+    global can_shoot
+    can_shoot = True
+    return
+
+def shoot_with_cooldown():
+    global can_shoot
+    if can_shoot:
+        main_tank.shoot()
+        can_shoot = False
+        screen.ontimer(reset_can_shoot, 1000)
+    return
+
+screen.onkey(shoot_with_cooldown, "space")
+
+screen.delay(0.5)
 screen.update()
 screen.mainloop()
 
 while game_on:
     pass
+
 
 

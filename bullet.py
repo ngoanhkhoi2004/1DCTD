@@ -1,4 +1,7 @@
+import time
 from turtle import Turtle
+import subprocess
+import sys
 
 
 class Bullet(Turtle):
@@ -12,7 +15,14 @@ class Bullet(Turtle):
         self.y = 0
 
     def move(self):
-        while self.xcor() < 800 and self.ycor() < 800:
+        while not self.out_of_bound():
             self.goto(self.xcor() + self.x, self.ycor() + self.y)
 
+    def out_of_bound(self, screen_size=800):
+        # check if bullet is out of bound
+        return abs(self.xcor()) > screen_size or abs(self.ycor()) > screen_size
 
+
+
+if __name__ == "__main__":
+    subprocess.run([sys.executable, 'tank_main.py'])

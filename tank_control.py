@@ -1,7 +1,7 @@
 from turtle import Turtle
 from bullet import Bullet
-import sys
 import subprocess
+import sys
 
 class MainTank(Turtle):
     def __init__(self):
@@ -31,10 +31,10 @@ class MainTank(Turtle):
         bullet.setx(self.body[3].xcor())
         bullet.sety(self.body[3].ycor())
         orientation = self.get_orientation()
-        if orientation == "up":
-            bullet.x = 0
-            bullet.y = 22
-            bullet.move()
+        data = {"up": [0, 0.4], "down": [0, -0.4], "left": [-0.4, 0], "right": [0.4, 0]}
+        bullet.x = data[orientation][0]
+        bullet.y = data[orientation][1]
+        bullet.move()
 
     def rotate(self, direction):
         """
