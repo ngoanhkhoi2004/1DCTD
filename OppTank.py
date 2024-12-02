@@ -1,37 +1,81 @@
 from turtle import Turtle
 import random
+from bullet import Bullet
 
+score = 0
 directions = ["up", "down", "right", "left"]
-from tank_main import MainTank
-class OppTank(MainTank):
+class OppTank(Turtle):
     def __init__(self):
         super().__init__()
-        self.direction = directions[random.randint(0,len(directions)-1)]
+        self.direction = directions[random.randint(0,3)]
         self.alive = True
+        self.body = []
+        self.dx = random.randint(-350, 350)
+        self.dy = random.randint(-350, 350)
+        self.bullet_speed = 17
 
     def opp_spawn(self):
-        if not self.alive:
-            return
-        self.spawn()
-        if self.direction == "right":
-            self.turn_right()
-        elif self.direction == "left":
-            self.turn_left()
-            self.turn_down()
+        for _ in range(4):
+            square = Turtle()
+            square.penup()
+            square.setposition(self.dx, self.dy)
+            square.shape("square")
+            square.color("white")
+            self.body.append(square)
+        if self.direction == "up":
+            self.body[1].goto(self.body[0].xcor(), self.body[0].ycor()+22)
+            self.body[2].goto(self.body[0].xcor()-22, self.body[0].ycor())
+            self.body[3].goto(self.body[0].xcor()+22, self.body[0].ycor())
+        elif self.direction == "down":
+            self.body[1].goto(self.body[0].xcor(), self.body[0].ycor()-22)
+            self.body[2].goto(self.body[0].xcor()-22, self.body[0].ycor())
+            self.body[3].goto(self.body[0].xcor()+22, self.body[0].ycor())
+        else:
+            self.body[1].goto(self.body[0].xcor() , self.body[0].ycor()-22)
+            self.body[2].goto(self.body[0].xcor(), self.body[0].ycor()+22)
+            if self.direction == "right":
+                self.body[3].goto(self.body[0].xcor() + 22, self.body[0].ycor())
+            elif self.direction == "left":
+                self.body[3].goto(self.body[0].xcor() - 22, self.body[0].ycor())
 
     def die(self):
-        self.alive = False  # Set alive status to False
-        self.hideturtle()   # Hide the turtle
-        self.clear()
+        self.alive = False
+        for square in self.body:
+            square.hideturtle()
+            square.clear()
+        self.body.clear()
 
-    def out_of_bound(self, screen_size=800):
-        # check if bullet is out of bound
-        return abs(self.xcor()) > screen_size or abs(self.ycor()) > screen_size
+    def opp_tank_move(self):
+        if self.direction == "up":
+            for square in self.body:
+                square.goto(square.xcor(), square.ycor()+11)
+        elif self.direction == "down":
+            for square in self.body:
+                square.goto(square.xcor(), square.ycor()-11)
+        elif self.direction == "right":
+            for square in self.body:
+                square.goto(square.xcor()+11, square.ycor())
+        elif self.direction == "left":
+            for square in self.body:
+                square.goto(square.xcor()-11, square.ycor())
 
+    def opp_shoot(self, tanks):
+        bullet = Bullet("opp_tank", tanks)
+        bullet.goto(self.body[0].xcor(), self.body[0].ycor())
+        data = {"up": [0, self.bullet_speed], "down": [0, -self.bullet_speed], "left": [-self.bullet_speed, 0], "right": [self.bullet_speed, 0]}
+        bullet.x = data[self.direction][0]
+        bullet.y = data[self.direction][1]
+        bullet.move()
 
+    def out_of_bound(self, screen_size=350):
+        return abs(self.body[0].xcor()) > screen_size or abs(self.body[0].ycor()) > screen_size
 
-
-
-
-
-
+    def check_collision(self, bullet):
+        global score
+        if bullet.source == self:
+            return False
+        for square in self.body:
+            if bullet.distance(square) < 15:
+                score += 1
+                return True
+        return False

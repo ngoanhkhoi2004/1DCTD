@@ -2,6 +2,7 @@ from turtle import Turtle
 from bullet import Bullet
 import subprocess
 import sys
+import random
 
 class MainTank(Turtle):
     def __init__(self):
@@ -9,29 +10,31 @@ class MainTank(Turtle):
         self.setx(0)
         self.sety(0)
         self.body = []
+        self.alive = True
+        self.bullet_speed = 17
 
-    def spawn(self):
+
+    def spawn(self, body_list):
         for i in range(3):
             square = Turtle()
             square.penup()
             square.shape("square")
             square.color("white")
             square.goto(self.xcor()+22*i, self.ycor())
-            self.body.append(square)
+            body_list.append(square)
         square = Turtle()
         square.shape("square")
         square.penup()
         square.color("white")
         square.goto(self.xcor() + 22 * 1, self.ycor()+22)
-        self.body.append(square)
+        body_list.append(square)
 
 
-    def shoot(self):
-        bullet = Bullet()
-        bullet.setx(self.body[3].xcor())
-        bullet.sety(self.body[3].ycor())
+    def shoot(self, tanks):
+        bullet = Bullet("main_tank", tanks)
+        bullet.goto(self.body[3].xcor(), self.body[3].ycor())
         orientation = self.get_orientation()
-        data = {"up": [0, 0.4], "down": [0, -0.4], "left": [-0.4, 0], "right": [0.4, 0]}
+        data = {"up": [0, self.bullet_speed], "down": [0, -self.bullet_speed], "left": [-self.bullet_speed, 0], "right": [self.bullet_speed, 0]}
         bullet.x = data[orientation][0]
         bullet.y = data[orientation][1]
         bullet.move()
@@ -157,6 +160,21 @@ class MainTank(Turtle):
         elif orientation == "left":
             for square in self.body:
                 square.goto(square.xcor()-11, square.ycor())
+
+    def check_collision(self, bullet):
+        if bullet.source == self:
+            return False
+        for square in self.body:
+            if bullet.distance(square) < 15:
+                return True
+        return False
+
+    def die(self):
+        self.alive = False
+        for square in self.body:
+            square.hideturtle()
+            square.clear()
+        self.body.clear()
 
 if __name__ == "__main__":
     subprocess.run([sys.executable, 'tank_main.py'])
