@@ -15,10 +15,14 @@ main_tank.spawn()
 
 #listen for tank controls
 screen.listen()
-screen.onkeypress(main_tank.move_right, "Right")
-screen.onkeypress(main_tank.move_up, "Up")
-screen.onkeypress(main_tank.move_down, "Down")
-screen.onkeypress(main_tank.move_left, "Left")
+screen.onkey(main_tank.turn_up, "Up")
+screen.onkey(main_tank.turn_down, "Down")
+screen.onkey(main_tank.turn_left, "Left")
+screen.onkey(main_tank.turn_right, "Right")
+screen.onkeypress(main_tank.move, "Up")
+screen.onkeypress(main_tank.move, "Down")
+screen.onkeypress(main_tank.move, "Left")
+screen.onkeypress(main_tank.move, "Right")
 screen.onkey(main_tank.shoot, "space") # shoot with space bar
 
 def game_loop():
@@ -28,6 +32,4 @@ def game_loop():
 
 game_loop()
 screen.mainloop()
-
-
 

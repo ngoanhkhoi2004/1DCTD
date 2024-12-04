@@ -33,5 +33,3 @@ class Bullet(Turtle):
             if abs(new_x) > 400 or abs(new_y) > 400:
                 self.hideturtle()
                 self.active = False
-
-
