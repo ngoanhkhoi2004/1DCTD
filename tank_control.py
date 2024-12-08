@@ -162,7 +162,7 @@ class MainTank(Turtle):
                 square.goto(square.xcor()-11, square.ycor())
 
     def check_collision(self, bullet):
-        if bullet.source == self:
+        if bullet.source == "main_tank":
             return False
         for square in self.body:
             if bullet.distance(square) < 15:

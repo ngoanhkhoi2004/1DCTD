@@ -2,7 +2,8 @@ from turtle import Turtle
 import random
 from bullet import Bullet
 
-score = 0
+
+
 directions = ["up", "down", "right", "left"]
 class OppTank(Turtle):
     def __init__(self):
@@ -71,11 +72,10 @@ class OppTank(Turtle):
         return abs(self.body[0].xcor()) > screen_size or abs(self.body[0].ycor()) > screen_size
 
     def check_collision(self, bullet):
-        global score
-        if bullet.source == self:
+
+        if bullet.source == "opp_tank":
             return False
         for square in self.body:
             if bullet.distance(square) < 15:
-                score += 1
                 return True
         return False
