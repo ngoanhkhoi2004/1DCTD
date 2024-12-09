@@ -71,7 +71,6 @@ def spawn_opponent():
         opp_tank = OppTank()
         opp_tank.opp_spawn()
         opponents_list.append(opp_tank)
-        print(opponents_list)
         move_opponent(opp_tank)
         screen.ontimer(spawn_opponent, 3500)
 

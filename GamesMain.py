@@ -6,8 +6,8 @@ import subprocess
 # List of games and their respective launch functions
 games = [
     ("Tank Game", lambda: subprocess.run([sys.executable, 'TankMain.py'])),
-    ("Grade 5", lambda: print("Launching Game 2...")),
-    ("Character Game", lambda: print("Launching Game 3...")),
+    ("Grade 5", lambda: subprocess.run([sys.executable, 'SmarterThanGrade5.py'])),
+    ("Character Game", lambda: subprocess.run([sys.executable, 'ThirdGame.py'])),
 ]
 
 current_selection = 0  # Keeps track of the currently selected menu item
