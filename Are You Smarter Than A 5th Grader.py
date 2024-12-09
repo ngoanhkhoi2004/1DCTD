@@ -1,155 +1,168 @@
+#ARE YOU SMARTER THAN A 5TH GRADER
+
 import turtle
 
-# Questions and answers (geared toward 5-year-olds)
+
+#List of 10 questions and respective answers
 questions = [
     {
-        "question": "What is war?",
-        "choices": ["A. A way to solve problems nicely",
-                    "B. A peaceful talk",
-                    "C. A fight between countries",
-                    "D. A fun game"],
-        "answer": "C"
+    "Question": "What is War?",
+    "Options": ["1. A way to solve problems nicely",
+                "2. A peaceful talk",
+                "3. A fight between countries",
+                "4. A fun game"],
+    "Answer": "3"
+},
+{
+    "Question": "Why is peace better than war?",
+    "Options": ["1. Because everyone is happy",
+                "2. Because people dont get hurt",
+                "3. Because friends can play together",
+                "4. All of the above"],
+    "Answer": "4"
+},
+    {
+    "Question": "Which country helped stop the war in World War II?",
+    "Options": ["1. The Moon",
+                "2. The United States",
+                "3. Atlantis",
+                "4. Disneyland"],
+    "Answer": "2"
     },
     {
-        "question": "Why is peace better than war?",
-        "choices": ["A. Because everyone is happy",
-                    "B. Because people don’t get hurt",
-                    "C. Because friends can play together",
-                    "D. All of the above"],
-        "answer": "D"
+    "Question": "Why do we try to avoid wars?",
+    "Options": ["1. Because they are loud",
+                "2. Because they are messy",
+                "3. Because people can get hurt",
+                "4. Because they are too short"],
+    "Answer": "3"
     },
     {
-        "question": "Which country helped stop the war in World War II?",
-        "choices": ["A. The Moon",
-                    "B. The United States",
-                    "C. Atlantis",
-                    "D. Candyland"],
-        "answer": "B"
+    "Question": "What can we do instead of fighting?",
+    "Options": ["1. Talk and listen",
+                "2. Shout loudly",
+                "3. Hide and seek",
+                "4. Build a fort"],
+    "Answer": "1"
     },
     {
-        "question": "Why do we try to avoid wars?",
-        "choices": ["A. Because they are loud",
-                    "B. Because they are messy",
-                    "C. Because people can get hurt",
-                    "D. Because they are too short"],
-        "answer": "C"
+    "Question": "What does peace mean?",
+    "Options": ["1. Everyone getting along",
+                "2. A quiet place",
+                "3. Eating pizza",
+                "4. Winning a race"],
+    "Answer": "1"
     },
     {
-        "question": "What can we do instead of fighting?",
-        "choices": ["A. Talk and listen",
-                    "B. Shout loudly",
-                    "C. Hide and seek",
-                    "D. Build a fort"],
-        "answer": "A"
+    "Question": "How can we show kindness to others?",
+    "Options": ["1. Sharing toys",
+                "2. Saying nice words",
+                "3. Helping someone in need",
+                "4. All of the above"],
+    "Answer": "4"
     },
     {
-        "question": "What does peace mean?",
-        "choices": ["A. Everyone getting along",
-                    "B. A quiet place",
-                    "C. Eating pizza",
-                    "D. Winning a race"],
-        "answer": "A"
+    "Question": "Why is it important to say sorry?",
+    "Options": ["1. It makes us happy",
+                "2. It shows we care",
+                "3. It fixes mistakes",
+                "4. All of the above"],
+    "Answer": "4"
     },
     {
-        "question": "How can we show kindness to others?",
-        "choices": ["A. Sharing toys",
-                    "B. Saying nice words",
-                    "C. Helping someone in need",
-                    "D. All of the above"],
-        "answer": "D"
+    "Question": "What should you do if someone is upset?",
+    "Options": ["1. Ignore them",
+                "2. Make fun of them",
+                "3. Be kind and help",
+                "4. Run away"],
+    "Answer": "3"
     },
     {
-        "question": "Why is it important to say sorry?",
-        "choices": ["A. It makes us happy",
-                    "B. It shows we care",
-                    "C. It fixes mistakes",
-                    "D. All of the above"],
-        "answer": "D"
-    },
-    {
-        "question": "What should you do if someone is upset?",
-        "choices": ["A. Ignore them",
-                    "B. Make fun of them",
-                    "C. Be kind and help",
-                    "D. Run away"],
-        "answer": "C"
-    },
-    {
-        "question": "What can we do to make the world a better place?",
-        "choices": ["A. Be mean to others",
-                    "B. Clean up trash",
-                    "C. Help people in need",
-                    "D. B and C"],
-        "answer": "D"
+    "Question": "What can we do to make the world a better place?",
+    "Options": ["1. Be mean to others",
+                "2. Clean up trash",
+                "3. Help people in need",
+                "4. Options 2 and 3 only"],
+    "Answer": "4"
     },
 ]
 
-# Setup turtle visuals
+# Setup the turtle screen for the game visuals
 def setup_screen():
-    screen = turtle.Screen()
-    screen.title("Are You Smarter Than a 5th Grader?")
-    screen.bgcolor("lightblue")
-    return screen
+    screen = turtle.Screen()  # Creating a screen on turtle for game to run on
+    screen.title("Are You Smarter Than a 5th Grader?")  # Adding the title of the game
+    screen.bgcolor("lightgreen")  # Set the background color of the screen, green for war theme, light for ease of reading
+    return screen  # Return the screen so we can use it later
 
-def display_question(t, question, choices):
-    t.clear()
-    t.penup()
-    t.goto(-200, 200)
-    t.write(question, align="left", font=("Arial", 16, "bold"))
+# Function to display the question and its options on the screen
+def display_question(t, question, options):
+    t.clear()  # Clear page
+    t.penup()  # Lift the mouse to move without drawing
+    t.goto(-200, 200)  # Move to the starting position for the question text
+    t.write(question, align="left", font=("Arial", 20, "bold"))  # Write the question in bold
+
+    # Set the vertical position for the first choice
     y_offset = 150
-    for choice in choices:
-        t.goto(-200, y_offset)
-        t.write(choice, align="left", font=("Arial", 14, "normal"))
-        y_offset -= 30
 
+    # Loop through each option and display it below the question
+    for option in options:
+        t.goto(-200, y_offset)  # Move to the next line for the option
+        t.write(option, align="left", font=("Arial", 16, "normal"))  # Write the options
+        y_offset -= 30  # Move down for the next option
+
+
+# Function to display the player's score on the screen
 def display_score(t, score, total):
-    t.clear()
-    t.penup()
-    t.goto(-200, -200)
-    t.write(f"Score: {score}/{total}", align="left", font=("Arial", 16, "bold"))
+    t.clear()  # Clear the previous score from screen
+    t.penup()  # Lift the mouse to move without drawing
+    t.goto(-200, -200)  # Move to the position for displaying the score
+    t.write(f"Score: {score}/{total}", align="left", font=("Arial", 16, "bold"))  # Display the score in the format "Score: X/Total"
 
-# Initialize turtle for questions and score
-screen = setup_screen()
-question_turtle = turtle.Turtle()
-question_turtle.hideturtle()
-question_turtle.speed(0)
+# Initialize the screen and turtles for questions and score
+screen = setup_screen()  # Call the function to set up the screen
 
-score_turtle = turtle.Turtle()
-score_turtle.hideturtle()
-score_turtle.speed(0)
+# Create a turtle for displaying questions
+question_turtle = turtle.Turtle()  # Create a turtle object for question text
+question_turtle.hideturtle()  # Hide the turtle shape so it doesn't appear on the screen
+question_turtle.speed(0)  # Set the turtle speed to immediate
 
-# Game variables
+# Create a turtle for displaying the score
+score_turtle = turtle.Turtle()  # Create another turtle object for score text
+score_turtle.hideturtle()  # Hide the turtle shape for this turtle as well
+score_turtle.speed(0)  # Set the turtle speed to immediate
+
+#Start the score at 0
 score = 0
 
 # Game loop
-for index, q in enumerate(questions, 1):
-    # Display the question and choices
-    display_question(question_turtle, f"Question {index}: {q['question']}", q['choices'])
+for index, q in enumerate(questions,1): #Start the question numbering from qn 1 instead of python auto qn 0
+    display_question(question_turtle, f"Question {index}: {q['Question']}", q['Options']) # Display the question and choices
 
-    # Get the user's answer
-    answer = screen.textinput(f"Question {index}", "Your answer (A, B, C, or D):").strip().upper()
+    answer = screen.textinput(f"Question {index}", "Your answer (1, 2, 3, or 4):").strip().upper() # Get the chosen answer
 
     # Check the answer
-    if answer == q["answer"]:
+
+    if answer == q["Answer"]:
         score += 1
-        feedback = "Correct! War is never a good solution."
+        feedback = "Correct! War is never a good solution to any problem."
     else:
-        feedback = f"Wrong! The correct answer was: {q['answer']}. Let's always choose peace!"
+        feedback = f"Wrong! The correct answer was: {q['Answer']}. Let's always choose peace to settle disputes!"
 
-    # Display feedback on screen
-    question_turtle.goto(-200, -50)
-    question_turtle.write(feedback, align="left", font=("Arial", 14, "italic"))
-    screen.update()
+# Display feedback on screen
+question_turtle.goto(-200, -50)
+question_turtle.write(feedback, align="left", font=("Arial", 15, "italic"))
+screen.update()
 
-    # Display the score
-    display_score(score_turtle, score, len(questions))
+# Show the final score
+display_score(score_turtle, score, len(questions))
 
-    # Wait for a moment before showing the next question
-    turtle.time.sleep(3)
+# Wait for 2 secs before showing the next question
+turtle.time.sleep(2)
 
 # End of game
 question_turtle.clear()
 question_turtle.goto(-200, 0)
-question_turtle.write(f"Game Over! Final Score: {score}/{len(questions)}", align="left", font=("Arial", 24, "bold"))
+question_turtle.write(f"Game Over! Final Score: {score}/{len(questions)}", align="left", font=("Arial", 26, "bold"))
 
+#End the code in turtle
 turtle.done()
