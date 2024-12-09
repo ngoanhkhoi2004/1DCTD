@@ -1,7 +1,7 @@
 import time #ensures dialogues do not appear too fast
 
 #Print welcome message
-print("Welcome to Tank Simulator!")
+print("Welcome to Tank RPG!")
 
 def get_callsign():
     while True:
