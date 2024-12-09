@@ -1,5 +1,5 @@
-from screen_manager import screen
-from tank_control import MainTank
+from Screen import screen
+from PlayerTank import MainTank
 from OppTank import OppTank
 from turtle import Turtle
 
@@ -77,7 +77,8 @@ def spawn_opponent():
 
 def check_main_tank_alive():
     if not main_tank.alive:
-        screen.bye()  # Exit the game if the main tank is dead
+        screen.bye()
+        # Exit the game if the main tank is dead
     else:
         screen.ontimer(check_main_tank_alive, 100)
         # Check every 100ms

@@ -2,8 +2,6 @@ from turtle import Turtle
 import random
 from bullet import Bullet
 
-
-
 directions = ["up", "down", "right", "left"]
 class OppTank(Turtle):
     def __init__(self):
@@ -61,8 +59,7 @@ class OppTank(Turtle):
                 square.goto(square.xcor()-11, square.ycor())
 
     def opp_shoot(self, tanks):
-        bullet = Bullet("opp_tank", tanks)
-        bullet.goto(self.body[0].xcor(), self.body[0].ycor())
+        bullet = Bullet("opp_tank", tanks, [self.body[0].xcor(), self.body[0].ycor()])
         data = {"up": [0, self.bullet_speed], "down": [0, -self.bullet_speed], "left": [-self.bullet_speed, 0], "right": [self.bullet_speed, 0]}
         bullet.x = data[self.direction][0]
         bullet.y = data[self.direction][1]

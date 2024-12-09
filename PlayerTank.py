@@ -1,7 +1,5 @@
 from turtle import Turtle
 from bullet import Bullet
-import subprocess
-import sys
 import random
 
 class MainTank(Turtle):
@@ -31,8 +29,7 @@ class MainTank(Turtle):
 
 
     def shoot(self, tanks):
-        bullet = Bullet("main_tank", tanks)
-        bullet.goto(self.body[3].xcor(), self.body[3].ycor())
+        bullet = Bullet("main_tank", tanks,[self.body[3].xcor(), self.body[3].ycor()])
         orientation = self.get_orientation()
         data = {"up": [0, self.bullet_speed], "down": [0, -self.bullet_speed], "left": [-self.bullet_speed, 0], "right": [self.bullet_speed, 0]}
         bullet.x = data[orientation][0]
@@ -176,5 +173,4 @@ class MainTank(Turtle):
             square.clear()
         self.body.clear()
 
-if __name__ == "__main__":
-    subprocess.run([sys.executable, 'tank_main.py'])
+

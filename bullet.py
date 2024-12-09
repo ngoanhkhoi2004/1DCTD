@@ -1,11 +1,11 @@
-from screen_manager import screen
+from Screen import screen
 from turtle import Turtle
 import subprocess
 import sys
 
 
 class Bullet(Turtle):
-    def __init__(self, source, tanks):
+    def __init__(self, source, tanks, position):
         super().__init__()
         self.shape("square")
         self.penup()
@@ -16,6 +16,7 @@ class Bullet(Turtle):
         self.source = source
         self.tanks = tanks
         self.active = True
+        self.goto(position)
 
     def out_of_bound(self, screen_size=800):
         return abs(self.xcor()) > screen_size or abs(self.ycor()) > screen_size
@@ -38,6 +39,3 @@ class Bullet(Turtle):
             self.disappear()
 
 
-
-if __name__ == "__main__":
-    subprocess.run([sys.executable, 'tank_main.py'])
