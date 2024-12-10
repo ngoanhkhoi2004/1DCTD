@@ -134,10 +134,10 @@ score_turtle.speed(0)  # Set the turtle speed to immediate
 score = 0
 
 # Game loop
-for index, q in enumerate(questions,1): #Start the question numbering from qn 1 instead of python auto qn 0
-    display_question(question_turtle, f"Question {index}: {q['Question']}", q['Options']) # Display the question and choices
+for index, q in enumerate(questions): #Start the question numbering from qn 1 instead of python auto qn 0
+    display_question(question_turtle, f"Question {index+1}: {q['Question']}", q['Options']) # Display the question and choices
 
-    answer = screen.textinput(f"Question {index}", "Your answer (1, 2, 3, or 4):").strip().upper() # Get the chosen answer
+    answer = screen.textinput(f"Question {index+1}", "Your answer (1, 2, 3, or 4):").strip().upper() # Get the chosen answer
 
     # Check the answer
 

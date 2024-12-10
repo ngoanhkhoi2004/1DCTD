@@ -25,15 +25,12 @@ def navigate_menu(event):
     global current_selection
     if event.keysym == "Up":
         current_selection = (current_selection - 1) % len(games)
-        print(current_selection)
         update_menu()
     elif event.keysym == "Down":
         current_selection = (current_selection + 1) % len(games)
-        print(current_selection)
         update_menu()
     elif event.keysym == "Return":
         games[current_selection][1]()  # Call the function for the selected game
-        print(current_selection)
 
 # Initialize the main window
 root = tk.Tk()

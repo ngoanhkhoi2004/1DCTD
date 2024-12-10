@@ -1,9 +1,10 @@
 import time #ensures dialogues do not appear too fast
 
+
 #Print welcome message
 print("Welcome to Tank RPG!")
 
-def get_callsign():
+def get_callsign(): #function for player's nickname
     while True:
         Callsign = input("Enter your desired callsign! [Maximum of 10 characters and no spaces]:").strip() #eliminates space before and after callsign
         time.sleep(1)
@@ -112,6 +113,15 @@ print("\nMaking your way into the battlegrounds, you can't contain your exciteme
 time.sleep(3)
 print("\nAll of a sudden, you hear a loud \033[1mBANG\033[0m to your left!\n")
 
+def end_game(success):
+    if success:
+        time.sleep(2)
+        print(f"\nWell done {player_name}! You succeeded in your mission and achieved glory!")
+    else:
+        time.sleep(2)
+        print("\nGAME OVER! You failed the mission! Better luck next time!")
+    exit()
+
 
 #prompt user for input
 def player_action():
@@ -139,6 +149,7 @@ def player_action():
                     print("Your crew detects and disarms a mine just in time, clearing the path for allied tanks.")
                     time.sleep(2)
                     print("Your bravery earns you the respect of your team, and you push forward to the next objective.")
+                    break
                 elif second_action == "2":
                     time.sleep(1)
                     print("\nYou take a detour to avoid the minefield.")
@@ -174,6 +185,7 @@ def player_action():
                     print("However, a surviving tank escapes to warn the main enemy force.")
                     time.sleep(2)
                     print("\033[1mThe enemy will be on high alert for the remainder of your mission...\033[0m")
+                    break
                 elif ambush_action == "2":
                     time.sleep(1)
                     print("\nYou call in artillery support, raining destruction on the enemy column.")
@@ -204,6 +216,7 @@ def player_action():
                 print("\nYour crew salvages ammunition and repair tools from the tank, boosting your combat readiness.")
                 time.sleep(2)
                 print("Your team feels confident as you prepare for the next battle.")
+                break
             elif salvage_action == "2":
                 time.sleep(1)
                 print("\nYou destroy the tank to ensure the enemy can't use it against you.")
@@ -229,7 +242,8 @@ def player_action():
                 print("Your tank destroys several enemy vehicles, but you're overwhelmed by concentrated fire.")
                 time.sleep(2)
                 print("\033[1mYour bravery inspires others, but you die in the process. Mission failed.\033[0m")
-                exit()
+                end_game(False) #signal game failure
+                return #End the game loop
             elif final_action == "2":
                 time.sleep(1)
                 print("\nYou coordinate with allied tanks, executing a flawless pincer maneuver.")
@@ -237,8 +251,8 @@ def player_action():
                 print("The enemy stronghold falls, and your mission is a resounding success.")
                 time.sleep(2)
                 print(f"\033[1mCongratulations, {player_name}! You are promoted to Captain for your heroic efforts.\033[0m")
-                #greatest ending
-                break
+                end_game(True)#greatest ending
+                return #End the game loop
             else:
                 print("Invalid option. Please type '1' or '2'.")
 
