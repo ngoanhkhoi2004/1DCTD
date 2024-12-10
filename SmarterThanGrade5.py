@@ -2,6 +2,9 @@
 
 import turtle
 import time
+import sys
+import subprocess
+
 
 #List of 10 questions and respective answers
 questions = [
@@ -157,4 +160,6 @@ question_turtle.goto(-200, 0)
 question_turtle.write(f"Game Over! Final Score: {score}/{len(questions)}", align="left", font=("Arial", 26, "bold"))
 
 #End the code in turtle
-turtle.done()
+turtle.bye()
+
+subprocess.run([sys.executable, 'GamesMain.py'])

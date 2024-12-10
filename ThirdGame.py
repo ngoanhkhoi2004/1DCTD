@@ -12,10 +12,16 @@ menu()
 choice = input("Enter your choice (1-3): ")
 if choice == "1":
     subprocess.run(["python", "ZW.py"])
+    subprocess.run([sys.executable, 'GamesMain.py'])
+
 elif choice == "2":
     subprocess.run(["python", "Chester.py"])
+    subprocess.run([sys.executable, 'GamesMain.py'])
+
 elif choice == "3":
     subprocess.run([sys.executable, 'Harish.py'])
+    subprocess.run([sys.executable, 'GamesMain.py'])
+
 else:
     print("Wrong command!")
     menu()
